@@ -6,7 +6,7 @@ function App() {
   return (
     <Router>
       <div>
-        <h1>Meal Sharing App</h1>
+        <h1 className="title">Meal Sharing App</h1>
         <MealsList />
       </div>
     </Router>

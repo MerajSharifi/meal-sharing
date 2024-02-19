@@ -1,40 +1,30 @@
-
 import React, { useState, useEffect } from 'react';
+import Meal from './Meal';
 
-function MealList () {
+function MealList() {
+  const [meals, setMeals] = useState([]);
 
-    const [meals, setMeals] = useState([]);
+  useEffect(() => {
+    fetchMeal();
+  }, []);
 
-    useEffect(() => {
-        fetchMeal();
-      }, []);
-    
-      const fetchMeal = async () => {
-        try {
-          const response = await fetch('http://localhost:3000/api/meals');
-          const data = await response.json();
-          setMeals(data);
-          console.log(data);
-        } catch (error) {
-          console.log(error);
-        }
-        
-      }; 
-    return(
-       <div>
-        <ul>
-        {meals.map((meal, index) => (
-          <li key={index}>
-            <h3>{meal.title}</h3>
-            <p>{meal.description}</p>
-            <p>Price: ${meal.price}</p>
-          </li>
-        ))}
+  const fetchMeal = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/meals');
+      const data = await response.json();
+      setMeals(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-        </ul>
-
-       </div>
-    )
+  return (
+    <div className="meals-list">
+      {meals.map((meal, index) => (
+        <Meal key={index} meal={meal} />
+      ))}
+    </div>
+  );
 }
 
 export default MealList;
