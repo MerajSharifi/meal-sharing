@@ -1,7 +1,9 @@
+// components/TestComponent/MealsList.jsx
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Meal from './Meal';
 
-function MealList() {
+function MealsList() {
   const [meals, setMeals] = useState([]);
 
   useEffect(() => {
@@ -21,10 +23,13 @@ function MealList() {
   return (
     <div className="meals-list">
       {meals.map((meal, index) => (
-        <Meal key={index} meal={meal} />
+        <div key={index} className="meal-card">
+          <Meal meal={meal} />
+          <Link to={`/meals/${meal.id}`}>View Details</Link>
+        </div>
       ))}
     </div>
   );
 }
 
-export default MealList;
+export default MealsList;
