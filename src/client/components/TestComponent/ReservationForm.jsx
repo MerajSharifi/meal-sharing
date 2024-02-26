@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+// ReservationForm.jsx
+import React, { useState } from "react";
 
 function ReservationForm({ id }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      fetch("http://localhost:3000/api/reservations", {
+      const response = await fetch("http://localhost:3000/api/reservations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -20,19 +21,21 @@ function ReservationForm({ id }) {
           number_of_guests: 4,
           meal_id: id,
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          alert(data);
-        });
+      });
+
+      if (response.ok) {
+        alert("Reservation successful!");
+      } else {
+        alert("Reservation failed. Please try again.");
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form className="reservation-form" onSubmit={handleSubmit}>
+    <div>
         <label>Name:</label>
         <input
           type="text"
@@ -56,7 +59,6 @@ function ReservationForm({ id }) {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-
       <button type="submit">Reserve</button>
     </form>
   );

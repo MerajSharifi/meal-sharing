@@ -7,10 +7,10 @@ function MealsList() {
   const [meals, setMeals] = useState([]);
 
   useEffect(() => {
-    fetchMeal();
+    fetchMeals();
   }, []);
 
-  const fetchMeal = async () => {
+  const fetchMeals = async () => {
     try {
       const response = await fetch('http://localhost:3000/api/meals');
       const data = await response.json();
@@ -23,9 +23,11 @@ function MealsList() {
   return (
     <div className="meals-list">
       {meals.map((meal, index) => (
-        <div key={index} className="meal-card">
+        <div key={index}>
           <Meal meal={meal} />
-          <Link to={`/meals/${meal.id}`}>View Details</Link>
+          <Link to={`/meals/${meal.id}`}>
+            <p>See Details...</p>
+          </Link>
         </div>
       ))}
     </div>
