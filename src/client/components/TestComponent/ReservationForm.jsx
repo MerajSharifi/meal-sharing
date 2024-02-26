@@ -1,4 +1,3 @@
-// ReservationForm.jsx
 import React, { useState } from "react";
 
 function ReservationForm({ id }) {

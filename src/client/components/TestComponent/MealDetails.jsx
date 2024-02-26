@@ -16,7 +16,6 @@ function MealDetails() {
 
   return (
     <div className="meal-details">
-      {/* <Meal /> */}
       This is meal details
       {meal ? (
         <div>

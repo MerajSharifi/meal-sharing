@@ -1,4 +1,3 @@
-// App.js
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MealsList from "./components/TestComponent/MealsList";
@@ -10,7 +9,6 @@ function App() {
   return (
     <Router>
       <Header />
-      <Router />
       <div>
         <h1 className="title">Meal Sharing App</h1>
         <Switch>
