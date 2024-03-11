@@ -2,7 +2,7 @@ require("dotenv").config();
 
 // create connection
 const knex = require("knex")({
-  client: "dpg-cnncfj7jbltc738dp7v0-a.frankfurt-postgres.render.com",
+  client: "postgres",
   connection: {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
