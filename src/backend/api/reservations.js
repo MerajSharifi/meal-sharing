@@ -6,7 +6,7 @@ const knex = require("../database");
 
 router.get("/", async (request, response) => {
     try {
-      const reservations = await knex("Reservation").select("*");
+      const reservations = await knex("reservations").select("*");
       response.json(reservations);
     } catch (error) {
       response.status(500).json({ error: "Error retrieving reservations" });
@@ -20,7 +20,7 @@ router.post("/", async (request, response) => {
     const newReservation = request.body;
     newReservation.created_date = new Date();
     try {
-      await knex("Reservation").insert(newReservation);
+      await knex("reservations").insert(newReservation);
       response.status(201).json("Reservation created successfully")
     } catch (error) {
       console.log(error);
@@ -35,7 +35,7 @@ router.post("/", async (request, response) => {
 
     try {
       const { id } = request.params;
-      const reservations = await knex("Reservation").select("*").where({ id }).first();
+      const reservations = await knex("reservations").select("*").where({ id }).first();
       if (reservations) {
         response.json(reservations);
       } else {
@@ -53,7 +53,7 @@ router.post("/", async (request, response) => {
       const { id } = request.params;
       const updateReservation = request.body;
   
-      const results = await knex("Reservation")
+      const results = await knex("reservations")
         .update(updateReservation)
         .where({ id })
   
@@ -73,7 +73,7 @@ router.post("/", async (request, response) => {
   router.delete("/:id", async (request, response) => {
     try {
       const { id } = request.params;
-      const deleteReservation = await knex("Reservation").select("*").where({ id }).del();
+      const deleteReservation = await knex("reservations").select("*").where({ id }).del();
       if (deleteReservation) {
         response.json({message: "Reservation deleted successfully"});
       } else {
