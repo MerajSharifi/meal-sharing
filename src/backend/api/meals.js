@@ -5,7 +5,7 @@ const knex = require("../database");
 
 router.get("/", async (request, response) => {
   try{
-const mealWithDescription = await knex("Meal").select("*")
+const mealWithDescription = await knex("meals").select("*")
 response.json(mealWithDescription);
   }catch(error){
     console.log("error", error)
@@ -17,7 +17,7 @@ response.json(mealWithDescription);
 router.get("/:id", async (req, res) => {
   try {
     const mealId = req.params.id;
-    const meal = await knex("Meal").where({ id: mealId }).first();
+    const meal = await knex("meals").where({ id: mealId }).first();
     if (!meal) {
       return res.status(404).json({ error: 'Meal not found' });
     }
